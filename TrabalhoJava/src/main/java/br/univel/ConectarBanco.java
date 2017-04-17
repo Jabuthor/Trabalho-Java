@@ -14,10 +14,10 @@ public class ConectarBanco {
 	public ConectarBanco(){
 		
 		
-		connectDB();
-		createTSQL();
-		handleSQL();
-		disconnectDB();
+		//connectDB();
+		//createTSQL();
+		//handleSQL();
+		//disconnectDB();
 	}
 	
 	public void connectDB(){
@@ -33,6 +33,7 @@ public class ConectarBanco {
 			verifyCon = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			disconnectDB();
 		}
 		
 		if(verifyCon == false){
@@ -56,6 +57,7 @@ public class ConectarBanco {
 	
 	public void createTSQL(){
 		PreparedStatement ps;
+		connectDB();
 		String sq = sql.createNewTable();
 		try {
 			connectDB();
@@ -64,20 +66,37 @@ public class ConectarBanco {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		disconnectDB();
 		
 		
 		
 	}
-	public void handleSQL(){
+	public void handleSQL(String sql){
 		PreparedStatement ps;
-		String sq = sql.getSql(p);
 		try {
-			ps = con.prepareStatement(sq);
+			ps = con.prepareStatement(sql);
 			ps.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	public void dropTable(Class<?> o){
+		PreparedStatement ps;
+		StringBuilder sb = new StringBuilder();
+		String nomeTabela;
+	      if (o.isAnnotationPresent(Tabela.class)) {
+
+	        Tabela anotacaoTabela = o.getAnnotation(Tabela.class);
+	        nomeTabela = anotacaoTabela.value();
+
+	      } else {
+	        nomeTabela = o.getSimpleName().toUpperCase();
+
+	      }
+	      sb.append("DROP TABLE ").append(nomeTabela).append(";");
+	      handleSQL(sb.toString());
+
 	}
 
 }

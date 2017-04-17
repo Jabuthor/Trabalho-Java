@@ -3,6 +3,8 @@ package br.univel;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
+import br.univel.tela.TelaPrincipal;
+
 public class Usql {
 	
 	
@@ -11,7 +13,7 @@ public String createNewTable() {
 	String strCreateTable = getCreateTable(Pessoa.class);
 	return strCreateTable;
 }
-public String getCreateTable(Class<Pessoa> cl) {
+public String getCreateTable(Class<?> cl) {
 
   try {
 
@@ -92,7 +94,6 @@ public String getCreateTable(Class<Pessoa> cl) {
 	
 	public String getSql(Object o){
 		StringBuilder sb = new StringBuilder();
-		
 		try {
 			sb.append("INSERT INTO " 
 			+ getTableName(o)
@@ -110,10 +111,6 @@ public String getCreateTable(Class<Pessoa> cl) {
 		return sb.toString();
 		
 	}
-	
-	
-
-
 	
 
 	private String getValues(Object o) throws IllegalArgumentException, IllegalAccessException {
