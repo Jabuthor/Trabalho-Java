@@ -10,6 +10,7 @@ public class ConectarBanco {
 	private Connection con;
 	Usql sql = new Usql();
 	Pessoa p = new Pessoa();
+
 	
 	public ConectarBanco(){
 		
@@ -97,6 +98,20 @@ public class ConectarBanco {
 	      sb.append("DROP TABLE ").append(nomeTabela).append(";");
 	      handleSQL(sb.toString());
 
+	}
+	
+	public void searchAll(Class<?> o){
+		StringBuilder sb = new StringBuilder();
+		String nomeTabela;
+	      if (o.isAnnotationPresent(Tabela.class)) {
+
+	        Tabela anotacaoTabela = o.getAnnotation(Tabela.class);
+	        nomeTabela = anotacaoTabela.value();
+
+	      } else {
+	        nomeTabela = o.getSimpleName().toUpperCase();
+	      }
+		handleSQL("SELECT * FROM " + nomeTabela);
 	}
 
 }

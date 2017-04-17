@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
  
 import br.univel.Coluna;
 import br.univel.ConectarBanco;
+import br.univel.ModeloTabela;
 import br.univel.Pessoa;
 import br.univel.Usql;
  

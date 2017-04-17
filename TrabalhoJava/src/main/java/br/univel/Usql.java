@@ -19,7 +19,6 @@ public String getCreateTable(Class<?> cl) {
 
     StringBuilder sb = new StringBuilder();
 
-    // Declara��o da tabela.
     {
       String nomeTabela;
       if (cl.isAnnotationPresent(Tabela.class)) {
@@ -36,7 +35,6 @@ public String getCreateTable(Class<?> cl) {
 
     Field[] atributos = cl.getDeclaredFields();
 
-    // Declara��o das colunas
     {
       for (int i = 0; i < atributos.length; i++) {
 
@@ -79,7 +77,6 @@ public String getCreateTable(Class<?> cl) {
       }
     }
 
-    // Declara��o das chaves prim�rias
 
     sb.append("\n);");
 
