@@ -77,9 +77,9 @@ public class TelaPrincipal extends JFrame {
        
         JPanel CPane = new JPanel();
         GridBagLayout gbl_contentPane = new GridBagLayout();
-        gbl_contentPane.columnWidths = new int[]{0, 0};
+        gbl_contentPane.columnWidths = new int[]{0, 0, 0};
         gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gbl_contentPane.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+        gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         CPane.setLayout(gbl_contentPane);
        
@@ -88,11 +88,24 @@ public class TelaPrincipal extends JFrame {
             JLabel newLbl = new JLabel(f.getAnnotation(Coluna.class).nome());
             CPane.add(newLbl,createConstraints(0, i));
             i++;
-            JTextField txtField = new JTextField(15);
-            CPane.add(txtField,createConstraints(0, i));
+            JTextField txtField = new JTextField();
+            txtField.setColumns(15);
+            CPane.add(txtField,Constraints(0, i));
             i++;
         }
-       
+        JButton jb = new JButton("Adicionar");
+        jb.setBounds(0, i, 550, 550);
+        CPane.add(jb,createConstraints(0, i));
+        JButton jb2 = new JButton("Excluir");
+        CPane.add(jb2,createConstraints(1, i));
+        JButton jb3 = new JButton("Buscar Todos");
+        CPane.add(jb3,createConstraints(2, i));
+        JButton jb4 = new JButton("Adicionar Tabela");
+        CPane.add(jb4,createConstraints(3, i));
+        JButton jb5 = new JButton("Excluir Tabela");
+        CPane.add(jb5,createConstraints(4, i));
+        
+        
         return CPane;
     }
    
@@ -103,6 +116,23 @@ public class TelaPrincipal extends JFrame {
         gbc_textField.gridy = y;
        
         return gbc_textField;
+    }
+    private GridBagConstraints btnCreateConstraints(int x, int y){
+        
+        GridBagConstraints gbc_textField = new GridBagConstraints();
+        gbc_textField.gridx = x;
+        gbc_textField.gridy = y;
+       
+        return gbc_textField;
+    }
+    private GridBagConstraints Constraints(int x, int y){
+    	
+    	GridBagConstraints gbc_textField = new GridBagConstraints();
+    	gbc_textField.gridwidth =2;
+    	gbc_textField.gridx = x;
+    	gbc_textField.gridy = y;
+    	
+    	return gbc_textField;
     }
  
 }
