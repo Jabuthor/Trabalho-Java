@@ -1,6 +1,7 @@
 package br.univel.tela;
  
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
  
 import javax.swing.JFrame;
@@ -59,9 +60,9 @@ public class TelaPrincipal extends JFrame {
      * Create the frame.
      */
     public TelaPrincipal() {
-       
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(150, 150, 600, 500);
+        setBounds(150, 150, 670, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
        
@@ -94,17 +95,28 @@ public class TelaPrincipal extends JFrame {
             i++;
         }
         JButton jb = new JButton("Adicionar");
-        jb.setBounds(0, i, 550, 550);
-        CPane.add(jb,createConstraints(0, i));
-        JButton jb2 = new JButton("Excluir");
-        CPane.add(jb2,createConstraints(1, i));
-        JButton jb3 = new JButton("Buscar Todos");
-        CPane.add(jb3,createConstraints(2, i));
-        JButton jb4 = new JButton("Adicionar Tabela");
-        CPane.add(jb4,createConstraints(3, i));
-        JButton jb5 = new JButton("Excluir Tabela");
-        CPane.add(jb5,createConstraints(4, i));
+        jb.setPreferredSize(new Dimension(130, 27));
+        CPane.add(jb,btnCreateConstraints(0, i));
         
+        JButton jb2 = new JButton("Excluir");
+        jb2.setPreferredSize(new Dimension(130, 27));
+        CPane.add(jb2,btnCreateConstraints(1, i));
+        
+        JButton jb3 = new JButton("Buscar Todos");
+        jb3.setPreferredSize(new Dimension(130, 27));
+        CPane.add(jb3,btnCreateConstraints(2, i));
+        
+        JButton jb4 = new JButton("Adicionar Tabela");
+        jb4.setPreferredSize(new Dimension(130, 27));
+        CPane.add(jb4,btnCreateConstraints(3, i));
+        
+        JButton jb5 = new JButton("Excluir Tabela");
+        jb5.setPreferredSize(new Dimension(130, 27));
+        CPane.add(jb5,btnCreateConstraints(4, i));
+
+        JScrollPane jp = new JScrollPane();
+        JTable tabela = new JTable();
+        jp.setViewportView(tabela);
         
         return CPane;
     }
@@ -120,6 +132,7 @@ public class TelaPrincipal extends JFrame {
     private GridBagConstraints btnCreateConstraints(int x, int y){
         
         GridBagConstraints gbc_textField = new GridBagConstraints();
+        gbc_textField.anchor = GridBagConstraints.NORTH;
         gbc_textField.gridx = x;
         gbc_textField.gridy = y;
        
